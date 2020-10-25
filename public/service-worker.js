@@ -3,18 +3,16 @@ const DATA_CACHE_NAME = "data-cache-v1";
 const FILES_TO_CACHE = [
   "/",
   "/assets/js/index.js",
-   "/manifest.webmanifest",
-  "/assets/css/style.css",
-  "/assets/js/loadImages.js",
+  "/manifest.webmanifest",
+  "/assets/css/styles.css",
   "/assets/images/icons/icon-192x192.png",
   "/assets/images/icons/icon-512x512.png"
 ];
 
 // install
 self.addEventListener("install", function (evt) {
-  // pre cache image data
   evt.waitUntil(
-    caches.open(DATA_CACHE_NAME).then((cache) => cache.addAll())
+    caches.open(DATA_CACHE_NAME).then((cache) => cache.add("/api/transaction"))
   );
     
   // pre cache all static assets
@@ -74,7 +72,7 @@ self.addEventListener("fetch", function(evt) {
       return cache.match(evt.request).then(response => {
         if (response) {
           return response;
-        } else if (event.request.headers.get("accept").includes("text/html")) {
+        } else if (evt.request.headers.get("accept").includes("text/html")) {
           // return the cached home page for all requests for html pages
           return caches.match("/");
         }
