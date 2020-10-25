@@ -2,7 +2,7 @@ const CACHE_NAME = "static-cache-v1";
 const DATA_CACHE_NAME = "data-cache-v1";
 const FILES_TO_CACHE = [
   "/",
-  "./assets/js/index.js",
+  "/assets/js/index.js",
    "/manifest.webmanifest",
   "/assets/css/style.css",
   "/assets/js/loadImages.js",
